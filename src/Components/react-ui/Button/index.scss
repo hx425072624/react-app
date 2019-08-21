@@ -1,0 +1,16 @@
+@import '../theme/index.scss';
+
+// .primary {
+//   background-color: $primaryColor;
+//   color: #fff;
+// }
+
+.react-ui__btn {
+  &--primary {
+    background-color: $primaryColor;
+  }
+
+  &--warning {
+    background-color: $warningColor;
+  }
+}

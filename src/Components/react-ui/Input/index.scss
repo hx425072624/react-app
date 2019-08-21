@@ -1,0 +1,27 @@
+.react-ui__input {
+    display: inline-block;
+    border:1px solid red;
+    input{
+        outline: none;
+        border: none;
+    }
+
+    &.focus{
+        border-color:blue;
+    }
+
+    &.size-large input{
+        line-height: 40px;
+        font-size: 18px;
+    }
+
+    &.size-middle input{
+        line-height: 30px;
+        font-size: 16px;
+    }
+
+    &.size-small input{
+        line-height: 20px;
+        font-size: 12px;
+    }
+}
