@@ -4,12 +4,40 @@ import './App.css'
 import Icon from './Components/react-ui/Icon'
 import Button from './Components/react-ui/Button'
 import Input from './Components/react-ui/Input'
+import Tabs, { TabPane } from './Components/react-ui/Tabs'
+import MobxView from './Components/Mobx/MobxView'
+import {
+  Panel,
+  PanelHeader,
+  PanelBody,
+  PanelFooter
+} from './Components/react-ui/Panel'
+import SearchInput from './Components/react-ui/SearchInput/SearchInput'
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: ''
+      value: '',
+      tabs: [
+        { id: 1, name: 'tab1', content: 'wo' },
+        { id: 2, name: 'tab2', content: 'shi' },
+        { id: 3, name: 'tab3', content: 'nb' }
+      ],
+      words: [],
+      callback: key => {
+        console.log(key)
+      }
     }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(value) {
+    let words = []
+    if (value) {
+      words = ['123', '456', '678']
+    }
+    this.setState({
+      words,value
+    })
   }
   value = '123'
   render() {
@@ -52,11 +80,35 @@ class App extends Component {
           defaultValue={this.value}
           onChange={e => {
             this.value = e.target.value
-            
           }}
           size="large"
         />
         <Input size="small" defaultValue={this.value} />
+        <br />
+        <Tabs defaultActiveKey={'1'} onChange={this.state.callback}>
+          {this.state.tabs.map(tab => (
+            <TabPane tab={tab.name} key={tab.id.toString()}>
+              {tab.content}
+            </TabPane>
+          ))}
+        </Tabs>
+
+        <br />
+        <MobxView />
+        <Panel>
+          <PanelHeader>
+            <h1>头</h1>
+          </PanelHeader>
+          <PanelBody>体</PanelBody>
+          <PanelFooter>尾</PanelFooter>
+        </Panel>
+        <br />
+        <SearchInput
+          words={this.state.words}
+          value={this.state.value}
+          onChange={this.handleChange}
+          callback={this.state.callback}
+        ></SearchInput>
       </div>
     )
   }

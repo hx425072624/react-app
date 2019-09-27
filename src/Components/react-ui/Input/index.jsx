@@ -51,7 +51,7 @@ class Input extends Component {
     return (
       <div className={inputClass}>
         {addonBefore && <Icon name={addonBefore} />}
-        <input
+        <input 
           value={this.value}
           onChange={e => {
             if (!this.isControl) {
@@ -76,7 +76,6 @@ class Input extends Component {
       </div>
     )
   }
-
   componentDidMount() {
     this.setState({
       innerValue: this.props.defaultValue

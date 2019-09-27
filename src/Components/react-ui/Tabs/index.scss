@@ -1,0 +1,12 @@
+
+.react-ui__nav {
+  display: flex;
+  list-style-type: none;
+  .active {
+    background-color: aquamarine
+  }
+  li{
+    padding:5px 10px;
+    border-radius: 4px;
+  }
+}
