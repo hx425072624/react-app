@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Panel, PanelHeader, PanelBody } from '../Panel'
-// import Input from '../Input'
+import Input from '../Input'
 import './index.scss'
 class SearchInput extends Component {
   constructor(props) {
@@ -73,12 +73,21 @@ class SearchInput extends Component {
       <div {...rest} className={`${name}`}>
         <Panel>
           <PanelHeader>
-            <input
+            {/* <input
               type="text"
               value={index === -1 ? value : words[index]}
               onChange={this.handleChange}
               onKeyDown={this.handleKeyDown}
-            />
+            /> */}
+            <Input
+              {...rest}
+              value={index === -1 ? value : words[index]}
+              onKeyDown={this.handleKeyDown}
+              onChange={this.handleChange}
+              size={size}
+              addonAfter={addonAfter}
+              addonBefore={addonBefore}
+            ></Input>
           </PanelHeader>
           <PanelBody>
             <ul>

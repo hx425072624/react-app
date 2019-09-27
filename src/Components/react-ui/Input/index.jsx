@@ -15,7 +15,7 @@ class Input extends Component {
   static propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func, //受控组件同时设置value和onChange
-
+    onKeyDown:PropTypes.func,
     defaultValue: PropTypes.string, //非受控组件
     size: PropTypes.string,
     addonAfter: PropTypes.string,
@@ -23,7 +23,8 @@ class Input extends Component {
   }
   static defaultProps = {
     size: 'middle',
-    onChange: () => {}
+    onChange: () => {},
+    onKeyDown:()=>{}
   }
 
   get isControl() {
@@ -40,7 +41,7 @@ class Input extends Component {
 
 
   render() {
-    const { onChange, size, addonAfter, addonBefore } = this.props
+    const { onChange, size, addonAfter, addonBefore,onKeyDown,value,defaultValue,...rest } = this.props
     const { focus } = this.state
     const inputClass = classNames({
       input: true,
@@ -49,7 +50,7 @@ class Input extends Component {
       'react-ui__input': true
     })
     return (
-      <div className={inputClass}>
+      <div className={inputClass} {...rest}>
         {addonBefore && <Icon name={addonBefore} />}
         <input 
           value={this.value}
@@ -61,6 +62,7 @@ class Input extends Component {
             }
             onChange(e)
           }}
+          onKeyDown={onKeyDown}
           onFocus={e => {
             this.setState({
               focus: true
