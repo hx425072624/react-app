@@ -13,6 +13,7 @@ import {
   PanelFooter
 } from './Components/react-ui/Panel'
 import SearchInput from './Components/react-ui/SearchInput/SearchInput'
+import Pagination from './Components/react-ui/Pagination'
 class App extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +27,8 @@ class App extends Component {
       words: [],
       callback: key => {
         console.log(key)
-      }
+      },
+      pageIndex:1
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -109,6 +111,9 @@ class App extends Component {
           onChange={this.handleChange}
           callback={this.state.callback}
         ></SearchInput>
+        <br/>
+
+<Pagination current={this.state.pageIndex} onChange={(e)=>{this.setState({pageIndex:e})}} total={1745693}></Pagination>
       </div>
     )
   }

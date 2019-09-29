@@ -5,7 +5,7 @@ class Pagination extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      innerCurrent: 1,
+      innerCurrent: 1
     }
   }
   static propTypes = {
@@ -42,25 +42,99 @@ class Pagination extends Component {
       total,
       ...rest
     } = this.props
+
+    console.log(current)
+    let paging = [] // 初始化
+    paging.push(
+      <li
+        key={'pre'}
+        onClick={e => {
+          if (current > 1) {
+            onChange(current - 1)
+          }
+        }}
+        disabled={current <= 1}
+      >
+        <span>pre</span>
+      </li>
+    ) //上一页
+    // 分页数据
+
+    for (let i = 1; i <= total; i++) {
+      if (i === 2 && current - 3 > 1) {
+        i = current - 3
+      } else if (i === current + 3 && current + 3 < total) {
+        i = total - 1
+      } else {
+        if (i === current) {
+          paging.push(
+            <li
+              key={i}
+              onClick={e => {
+                onChange(current)
+              }}
+              className={'active'}
+            >
+              <span>{i}</span>
+            </li>
+          )
+        } else {
+          if (i === current - 2 && i > 2) {
+            paging.push(
+              <li
+                key={'-5p'}
+                onClick={e => {
+                  onChange(i - 5)
+                }}
+              >
+                <span>...</span>
+              </li>
+            )
+          }
+          paging.push(
+            <li
+              key={i}
+              onClick={e => {
+                onChange(i)
+              }}
+            >
+              <span>{i}</span>
+            </li>
+          )
+
+          if (i === current + 2 && i < total) {
+            paging.push(
+              <li
+                key={'+5p'}
+                onClick={e => {
+                  onChange(i + 5)
+                }}
+              >
+                <span>...</span>
+              </li>
+            )
+          }
+        }
+      }
+    }
+
+    paging.push(
+      <li
+        key={'next'}
+        onClick={e => {
+          if (current < total) {
+            onChange(current + 1)
+          }
+        }}
+        disabled={current >= total}
+      >
+        <span>next</span>
+      </li>
+    ) //下一页
     // const { innerCurrent } = this.state
     return (
       <div {...rest} className={`${name}`}>
-        {() => {
-          let paging = [] // 初始化 
-          paging.push(<span>pre</span>)//上一页
-          // 分页数据
-          for (let index = 1; index <= total; index++) {
-            if (index ===1||index === total) {
-              paging.push(<span>{index}</span>)
-            }
-            else{
-
-            }
-          }
-
-          paging.push(<span>next</span>)//下一页
-          return paging
-        }}
+        <ul>{paging}</ul>
       </div>
     )
   }

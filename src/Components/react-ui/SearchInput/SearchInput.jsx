@@ -15,7 +15,7 @@ class SearchInput extends Component {
   static propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func, //受控组件同时设置value和onChange
-
+    children: PropTypes.element,
     name: PropTypes.string,
     words: PropTypes.array,
     callback: PropTypes.func
@@ -60,17 +60,21 @@ class SearchInput extends Component {
     const {
       name,
       words,
-      callback,
-      size,
       value,
-      addonAfter,
-      addonBefore,
-      onChange,
-      ...rest
+      children
     } = this.props
     const { index } = this.state
+    const input = children ? (
+      children
+    ) : (
+      <Input
+        value={index === -1 ? value : words[index]}
+        onKeyDown={this.handleKeyDown}
+        onChange={this.handleChange}
+      ></Input>
+    )
     return (
-      <div {...rest} className={`${name}`}>
+      <div  className={`${name}`}>
         <Panel>
           <PanelHeader>
             {/* <input
@@ -79,7 +83,7 @@ class SearchInput extends Component {
               onChange={this.handleChange}
               onKeyDown={this.handleKeyDown}
             /> */}
-            <Input
+            {/* <Input
               {...rest}
               value={index === -1 ? value : words[index]}
               onKeyDown={this.handleKeyDown}
@@ -87,7 +91,8 @@ class SearchInput extends Component {
               size={size}
               addonAfter={addonAfter}
               addonBefore={addonBefore}
-            ></Input>
+            ></Input> */}
+            {input}
           </PanelHeader>
           <PanelBody>
             <ul>

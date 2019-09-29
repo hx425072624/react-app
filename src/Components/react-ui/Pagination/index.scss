@@ -1,0 +1,23 @@
+li {
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #d9d9d9;
+    color: rgba(0,0,0,0.65);
+    min-width: 32px;
+    display: inline-block;
+}
+
+li[disabled] {
+    cursor: not-allowed
+}
+li[disabled]:hover {
+    cursor: not-allowed
+}
+li.active {
+    border: 1px solid #1890ff;
+    color: #1890ff;
+}
+li:hover{
+    cursor: pointer;
+}
