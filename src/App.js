@@ -4,6 +4,7 @@ import './App.css'
 import Icon from './Components/react-ui/Icon'
 import Button from './Components/react-ui/Button'
 import Input from './Components/react-ui/Input'
+import InputNumber from './Components/react-ui/InputNumber'
 import Tabs, { TabPane } from './Components/react-ui/Tabs'
 import MobxView from './Components/Mobx/MobxView'
 import {
@@ -14,6 +15,7 @@ import {
 } from './Components/react-ui/Panel'
 import SearchInput from './Components/react-ui/SearchInput/SearchInput'
 import Pagination from './Components/react-ui/Pagination'
+import LifeCircles from './Components/LifeCircles/LifeCircles'
 class App extends Component {
   constructor(props) {
     super(props)
@@ -28,7 +30,7 @@ class App extends Component {
       callback: key => {
         console.log(key)
       },
-      pageIndex:1
+      pageIndex: 1
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -38,7 +40,8 @@ class App extends Component {
       words = ['123', '456', '678']
     }
     this.setState({
-      words,value
+      words,
+      value
     })
   }
   value = '123'
@@ -111,9 +114,24 @@ class App extends Component {
           onChange={this.handleChange}
           callback={this.state.callback}
         ></SearchInput>
-        <br/>
+        <br />
 
-<Pagination current={this.state.pageIndex} onChange={(e)=>{this.setState({pageIndex:e})}} total={1745693}></Pagination>
+        <Pagination
+          current={this.state.pageIndex}
+          onChange={e => {
+            this.setState({ pageIndex: e })
+          }}
+          total={1745693}
+        ></Pagination>
+
+        <br />
+        <LifeCircles></LifeCircles>
+        <br />
+        <InputNumber  defaultValue={this.value}
+          onChange={e => {
+            this.value = e.target.value
+          }}
+          size="large"></InputNumber>
       </div>
     )
   }

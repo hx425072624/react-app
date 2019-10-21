@@ -1,10 +1,9 @@
-
 import React, { Component } from 'react'
-import Icon from '../Icon'
+
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import './index.scss'
-class Input extends Component {
+class InputNumber extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,13 +13,11 @@ class Input extends Component {
   }
 
   static propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.number,
     onChange: PropTypes.func, //受控组件同时设置value和onChange
     onKeyDown:PropTypes.func,
-    defaultValue: PropTypes.string, //非受控组件
+    defaultValue: PropTypes.number, //非受控组件
     size: PropTypes.string,
-    addonAfter: PropTypes.string,
-    addonBefore: PropTypes.string
   }
   static defaultProps = {
     size: 'middle',
@@ -42,7 +39,7 @@ class Input extends Component {
 
 
   render() {
-    const { onChange, size, addonAfter, addonBefore,onKeyDown,value,defaultValue,...rest } = this.props
+    const { onChange, size,  onKeyDown,value,defaultValue,...rest } = this.props
     const { focus } = this.state
     const inputClass = classNames({
       input: true,
@@ -52,8 +49,8 @@ class Input extends Component {
     })
     return (
       <div className={inputClass} {...rest}>
-        {addonBefore && <Icon name={addonBefore} />}
         <input 
+          type='number'
           value={this.value}
           onChange={e => {
             if (!this.isControl) {
@@ -75,7 +72,6 @@ class Input extends Component {
             })
           }}
         />
-        {addonAfter && <Icon name={addonAfter} />}
       </div>
     )
   }
@@ -85,4 +81,4 @@ class Input extends Component {
     })
   }
 }
-export default Input
+export default InputNumber

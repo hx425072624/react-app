@@ -28,6 +28,7 @@ class LifeCircles extends Component {
   componentWillUnmount() {
     console.log('LifeCircles will Unmount')
   }
+  
 }
 
 class Son1 extends Component {
@@ -55,16 +56,24 @@ class Son1 extends Component {
   }
 }
 class GrandSon1 extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      name:'GrandSon1'
+    }
+  }
   render() {
     console.log('GrandSon1 render')
     return (
       <div>
         GrandSon1
         {this.props.name}
+        {this.state.name}
       </div>
     )
   }
   componentDidMount() {
+    window.grandson = this
     console.log('GrandSon1 mount')
   }
   componentWillUpdate(nextProps, nextState) {
