@@ -16,6 +16,8 @@ import {
 import SearchInput from './Components/react-ui/SearchInput/SearchInput'
 import Pagination from './Components/react-ui/Pagination'
 import LifeCircles from './Components/LifeCircles/LifeCircles'
+import confirm from './Components/react-ui/Confirm'
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -132,8 +134,14 @@ class App extends Component {
             this.value = e.target.value
           }}
           size="large"></InputNumber>
+          <br />
+          
       </div>
     )
+  }
+ async componentDidMount(){
+  let res =  await confirm('hahah')
+  console.log(res)
   }
 }
 
